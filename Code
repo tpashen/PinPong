@@ -31,3 +31,42 @@ class Player(GameSprite):
  win_height = 500
  window = display.set_mode((win_width, win_height))
  window.fill(back)
+ racket1 = Игрок ('racket.png', 30, 200, 4, 50, 150)
+ racket2 = Игрок ('racket.png', 520, 4, 50, 150)
+ мяч = GameSprite ('tensi_ball.png', 200, 200, 4, 50, 50)
+
+ font.intit ()
+ font = font.Font (calibri.ttf ', 35)
+ lost1 = font.render ('ИГРОК 1 ПРОИГРЫВАЕТ!', Верно, (180,0,0))
+ lost2 = font.render ('ИГРОК 2 ПРОИГРЫВАЕТ!', Верно, (180,0,0))
+
+ speed_x = 3
+ speed_y = 3
+ во время игры:
+   для e в event.get ():
+     если e.type == ВЫЙТИ:
+       game = Ложь
+     если закончить! = Истина:
+       window.fill (назад)
+       racket1.update_l ()
+       racket2.update_r ()
+       ball.rect.x + = speed_x
+       ball.rect.y + = speed_y
+       если sprite.collide_rect (racket1, ball) или sprite.collide_rect (racket2, ball):
+         speed_x * = -1
+         speed_y * = 1
+       если ball.rect.y> win_height-50 или ball.rect.y <0:
+         speed_y * = -1
+       если ball.rect.x <0:
+         finish = True
+         window.blit (проиграть1, (200,200))
+         game_over = Верно
+       если ball.rect.x> win_width:
+         finish = True
+         window.blit (проиграть2, (200, 200)
+         game_over = Верно
+       racket1.reset ()
+       racket2.reset ()
+       ball1.reset ()
+     display.update ()  
+     clock.tick (FPS)
